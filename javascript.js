@@ -1,37 +1,83 @@
-console.log("js console");
-let button = document.querySelector("#show-songs");
-let grid = document.querySelector(".grid-container");
+console.log("js started");
 
-var xhttp = new XMLHttpRequest();
+var data;
+var grid = document.querySelector(".grid-container");
 
-xhttp.onreadystatechange = function (){
-  if (xhttp.readyState === 4 && xhttp.status === 200) {
-    let songs = JSON.parse(xhttp.responseText);
-    console.log(songs[0]);
+// LOAD DATA (localStorage first, otherwise XHR)
+if (localStorage.getItem("datalist")) {
+  data = JSON.parse(localStorage.getItem("datalist"));
+  console.log("Loaded from localStorage");
+  if (grid) {
+    makeCards();
+  }
+} else {
+  var xhttp = new XMLHttpRequest();
 
-songs.forEach(function(songs){
-let card = document.createElement("div");
-card.classList.add("card");
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      data = JSON.parse(this.responseText);
+      console.log("Loaded from gameData.json");
 
-let textGame=
-"<div class = 'game-title'>" + songs.title + "</div>"+
-"<span>" +
-"Publisher: " + songs.publisher + "<br>"+
-"<span>" +
-"Release Date: " + songs.releaseDate + "<br>" +
-"Needs Research:"  +
-"</span>";
+      localStorage.setItem("datalist", JSON.stringify(data));
+      console.log("Saved starter data to localStorage");
 
-card.innerHTML = textGame;
-if(song.imgSrc){
-  card.style.backgroundImage = "url(" + song.imgSrc +")"
+      if (grid) {
+        makeCards();
+      }
+    }
+  };
+
+  xhttp.open("GET", "JSON.json", true);
+  xhttp.send();
 }
 
-grid.appendChild(card);
-});
-  }
-};
+// RENDER CARDS
+function makeCards() {
+  grid.innerHTML = "";
 
-xhttp.open("GET", "JSON.json", true);
-xhttp.send();
-      
+  data.forEach(function (song) {
+    let card = document.createElement("div");
+    card.classList.add("card");
+
+    let textData =
+      "<div class='game-title'>" + song.title + "</div>" +
+      "<div>Publisher: " + song.publisher + "</div>" +
+      "<div>Artist: " + song.artist + "</div>";
+
+    card.innerHTML = textData;
+    grid.appendChild(card);
+  });
+
+  console.log("cards refreshed");
+}
+
+
+//if all in the same file, copy all of the code below underneath the script code from snippet A
+var form = document.querySelector("form");
+var titleInput = document.querySelector("#sname");
+var publishInput = document.querySelector("#publisher");
+var artistInput = document.querySelector("#aname");
+//var dateInput = document.querySelector("#release-date-input");
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  var newObj = {
+    title: titleInput.value,
+    artist: artistInput.value,
+    publisher: publishInput.value
+  };
+
+  data.push(newObj);
+  localStorage.setItem("datalist", JSON.stringify(data));
+  console.log("Saved new item to localStorage");
+
+  // Only render if grid exists on this page
+  if (document.querySelector(".grid-container")) {
+    makeCards();
+  }
+
+  form.reset();
+});
+
+
