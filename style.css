@@ -1,0 +1,130 @@
+body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f4f4f4;
+            padding: 50px;
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .answer-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .correct {
+            background-color: green;
+            color: white;
+        }
+
+        .wrong {
+            background-color: red;
+            color: white;
+        }
+
+        #nextBtn {
+            display: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    body {
+      background: linear-gradient(to right, #0f172a, #1e293b);
+      color: white;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: bold;
+      animation: glow 2s infinite alternate;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #38bdf8;
+      }
+      to {
+        text-shadow: 0 0 25px #22c55e;
+      }
+    }
+
+    .tech-card {
+      background-color: rgb(255, 255, 255);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 25px;
+      transition: 0.3s;
+      height: 100%;
+    }
+
+    .tech-card:hover {
+      transform: translateY(-10px);
+      background-color: rgba(255,255,255,0.15);
+    }
+
+    .quiz-section {
+      padding: 60px 20px;
+    }
+
+    .quiz-box {
+      background: rgb(255, 255, 255);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    .btn-custom {
+      background-color: #22c55e;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+
+    .btn-custom:hover {
+      background-color: #16a34a;
+      transform: scale(1.05);
+    }
+
+    .sports-icons {
+      font-size: 3rem;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%,100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #94a3b8;
+    }
